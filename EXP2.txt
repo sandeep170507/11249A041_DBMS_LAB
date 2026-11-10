@@ -1,0 +1,135 @@
+D:\11249a041>sqlplus
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Nov 9 21:00:00 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A041@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> SPOOL D:\11249A041\EXP2.TXT
+
+SQL> CREATE TABLE EMPLOYEE
+  2  (
+  3      EMP_ID NUMBER(5) PRIMARY KEY,
+  4      EMP_NAME VARCHAR2(30),
+  5      DEPARTMENT VARCHAR2(20),
+  6      SALARY NUMBER(8),
+  7      CITY VARCHAR2(20)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (101,'ARUN','CSE',35000,'CHENNAI');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (102,'BALA','ECE',32000,'VELLORE');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (103,'DIVYA','IT',40000,'KANCHIPURAM');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (104,'KAVI','CSE',38000,'CHENNAI');
+
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+    EMP_ID EMP_NAME                       DEPARTMENT               SALARY CITY
+---------- ------------------------------ -------------------- ---------- --------------------
+       101 ARUN                           CSE                       35000 CHENNAI
+       102 BALA                           ECE                       32000 VELLORE
+       103 DIVYA                          IT                        40000 KANCHIPURAM
+       104 KAVI                           CSE                       38000 CHENNAI
+
+SQL> UPDATE EMPLOYEE
+  2  SET SALARY = 35000
+  3  WHERE EMP_ID = 102;
+
+1 row updated.
+
+SQL> SELECT * FROM EMPLOYEE
+  2  WHERE EMP_ID = 102;
+
+    EMP_ID EMP_NAME                       DEPARTMENT               SALARY CITY
+---------- ------------------------------ -------------------- ---------- --------------------
+       102 BALA                           ECE                       35000 VELLORE
+
+SQL> DELETE FROM EMPLOYEE
+  2  WHERE DEPARTMENT = 'IT';
+
+1 row deleted.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+    EMP_ID EMP_NAME                       DEPARTMENT               SALARY CITY
+---------- ------------------------------ -------------------- ---------- --------------------
+       101 ARUN                           CSE                       35000 CHENNAI
+       102 BALA                           ECE                       35000 VELLORE
+       104 KAVI                           CSE                       38000 CHENNAI
+
+SQL> ALTER TABLE EMPLOYEE
+  2  ADD EMAIL VARCHAR2(40);
+
+Table altered.
+
+SQL> DESC EMPLOYEE;
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL NUMBER(5)
+ EMP_NAME                                           VARCHAR2(30)
+ DEPARTMENT                                         VARCHAR2(20)
+ SALARY                                             NUMBER(8)
+ CITY                                               VARCHAR2(20)
+ EMAIL                                              VARCHAR2(40)
+
+SQL> ALTER TABLE EMPLOYEE
+  2  MODIFY EMP_NAME VARCHAR2(50);
+
+Table altered.
+
+SQL> DESC EMPLOYEE;
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL NUMBER(5)
+ EMP_NAME                                           VARCHAR2(50)
+ DEPARTMENT                                         VARCHAR2(20)
+ SALARY                                             NUMBER(8)
+ CITY                                               VARCHAR2(20)
+ EMAIL                                              VARCHAR2(40)
+
+SQL> SELECT *
+  2  FROM EMPLOYEE
+  3  WHERE DEPARTMENT = 'CSE';
+
+    EMP_ID EMP_NAME                       DEPARTMENT               SALARY CITY       EMAIL
+---------- ------------------------------ -------------------- ---------- ---------- ----------------------------------------
+       101 ARUN                           CSE                       35000 CHENNAI
+       104 KAVI                           CSE                       38000 CHENNAI
+
+SQL> SELECT EMP_NAME, SALARY
+  2  FROM EMPLOYEE
+  3  WHERE SALARY > 35000;
+
+EMP_NAME                                               SALARY
+-------------------------------------------------- ----------
+KAVI                                                    38000
+
+SQL> SELECT EMP_NAME, CITY
+  2  FROM EMPLOYEE
+  3  WHERE CITY = 'CHENNAI';
+
+EMP_NAME                                           CITY
+-------------------------------------------------- --------------------
+ARUN                                               CHENNAI
+KAVI                                               CHENNAI
+
+SQL> SPOOL OFF
